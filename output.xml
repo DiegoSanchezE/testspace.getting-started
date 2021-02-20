@@ -1,0 +1,3528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.6.9 on linux)" generated="20210212 14:40:35.220" rpa="false">
+<suite id="s1" name="Sitescan-Manager-Automation" source="/usr/bin/sitescan-manager-automation">
+<kw name="Initializing System" type="setup">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}==&gt; Initializing System</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:36.571" endtime="20210212 14:40:36.572"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>platform.system()</arg>
+<arg>platform</arg>
+</arguments>
+<assign>
+<var>${os}</var>
+</assign>
+<msg timestamp="20210212 14:40:36.587" level="INFO">${os} = Linux</msg>
+<status status="PASS" starttime="20210212 14:40:36.573" endtime="20210212 14:40:36.587"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${SYSTEM_OS}</arg>
+<arg>${os}</arg>
+</arguments>
+<msg timestamp="20210212 14:40:36.591" level="INFO">${SYSTEM_OS} = Linux</msg>
+<status status="PASS" starttime="20210212 14:40:36.588" endtime="20210212 14:40:36.591"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Current OS = ${SYSTEM_OS}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:36.592" endtime="20210212 14:40:36.594"></status>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Get SS Version</arg>
+</arguments>
+<kw name="Get SS Version">
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${DEBUG_FLAG} != ${false}</arg>
+</arguments>
+<msg timestamp="20210212 14:40:36.600" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210212 14:40:36.598" endtime="20210212 14:40:36.600"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:36.596" endtime="20210212 14:40:36.601"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:36.595" endtime="20210212 14:40:36.601"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210212 14:40:36.601" endtime="20210212 14:40:36.602"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}Initializing System &lt;==</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:36.603" endtime="20210212 14:40:36.604"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:36.569" endtime="20210212 14:40:36.605"></status>
+</kw>
+<suite id="s1-s1" name="Projects Tab" source="/usr/bin/sitescan-manager-automation/projects_tab">
+<suite id="s1-s1-s1" name="New Project" source="/usr/bin/sitescan-manager-automation/projects_tab/new_project.robot">
+<test id="s1-s1-s1-t1" name="New Project">
+<kw name="Setup" type="setup">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}==&gt; TEST SETUP</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:37.043" endtime="20210212 14:40:37.045"></status>
+</kw>
+<kw name="Navigate To Site Scan" library="user_keywords">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${SYSTEM_OS}' == 'Linux'</arg>
+<arg>Open Chrome for Linux And Navigate To SS</arg>
+<arg>ELSE</arg>
+<arg>Open Chrome For Windows And Navigate To SS</arg>
+</arguments>
+<kw name="Open Chrome for Linux And Navigate To SS" library="user_keywords">
+<doc>Sets up the Chrome envrionment for the Linux, displayless image.
+This will run in the Jenkins job on the Docker container's Ubuntu image. This means that there's
+no real display for the browser to run in and, thereofre, it requires a virtual display to run
+correctly. It uses the Xvfb library.</doc>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${\n}Creating WebDriver</arg>
+</arguments>
+<msg timestamp="20210212 14:40:37.053" level="INFO">
+Creating WebDriver</msg>
+<status status="PASS" starttime="20210212 14:40:37.052" endtime="20210212 14:40:37.054"></status>
+</kw>
+<kw name="Start Virtual Display" library="XvfbRobot">
+<doc>Starts virtual display which will be
+ destroyed after test execution will be end</doc>
+<arguments>
+<arg>1920</arg>
+<arg>1080</arg>
+</arguments>
+<msg timestamp="20210212 14:40:37.056" level="INFO">Using virtual display: '1920x1080x24'</msg>
+<status status="PASS" starttime="20210212 14:40:37.055" endtime="20210212 14:40:37.164"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+</arguments>
+<assign>
+<var>${options}</var>
+</assign>
+<msg timestamp="20210212 14:40:37.168" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7fb504c2c630&gt;</msg>
+<status status="PASS" starttime="20210212 14:40:37.165" endtime="20210212 14:40:37.168"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--no-sandbox</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:37.168" endtime="20210212 14:40:37.170"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-setuid-sandbox</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:37.170" endtime="20210212 14:40:37.171"></status>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<arguments>
+<arg>${BROWSER}</arg>
+<arg>chrome_options=${options}</arg>
+</arguments>
+<msg timestamp="20210212 14:40:37.173" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" starttime="20210212 14:40:37.171" endtime="20210212 14:40:39.216"></status>
+</kw>
+<kw name="Set Window Size" library="SeleniumLibrary">
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<arguments>
+<arg>1920</arg>
+<arg>1080</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:40:39.218" endtime="20210212 14:40:39.342"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${SS_URL}</arg>
+</arguments>
+<msg timestamp="20210212 14:40:39.344" level="INFO">Opening url 'https://staging.stscn.net/'</msg>
+<status status="PASS" starttime="20210212 14:40:39.343" endtime="20210212 14:41:08.634"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:37.050" endtime="20210212 14:41:08.635"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:37.048" endtime="20210212 14:41:08.635"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:37.045" endtime="20210212 14:41:08.636"></status>
+</kw>
+<kw name="Log Into Site Scan" library="user_keywords">
+<doc>Logs into Site Scan Manager.
+It takes user email and password.</doc>
+<arguments>
+<arg>${SS_LOGIN_EMAIL}</arg>
+<arg>${SS_PASSWORD}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${LOGIN_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:08.641" endtime="20210212 14:41:08.741"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>0.5s</arg>
+<arg>${LOGIN_BUTTON}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:08.746" endtime="20210212 14:41:08.747"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:08.747" endtime="20210212 14:41:09.834"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:09.835" endtime="20210212 14:41:09.836"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:08.742" endtime="20210212 14:41:09.836"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${LOGIN_EMAIL_INPUT}</arg>
+<arg>${user}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:09.838" level="INFO">Typing text 'ssmanagerautomation@esri.com' into text field '//input[@data-test='login-email']'.</msg>
+<status status="PASS" starttime="20210212 14:41:09.837" endtime="20210212 14:41:10.277"></status>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${LOGIN_PASSWORD_INPUT}</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:10.279" level="INFO">Typing password into text field '//input[@data-test='login-password']'.</msg>
+<msg timestamp="20210212 14:41:10.450" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210212 14:41:10.671" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20210212 14:41:10.278" endtime="20210212 14:41:10.671"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${LOGIN_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:10.672" endtime="20210212 14:41:10.773"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${LOGIN_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:10.775" level="INFO">Clicking element '//calcite-button[@data-test='login-submit']'.</msg>
+<status status="PASS" starttime="20210212 14:41:10.773" endtime="20210212 14:41:10.952"></status>
+</kw>
+<kw name="Too Many Requests Check" library="user_keywords">
+<doc>This is a check for the 'Too Many Requests' instance.
+When you try to login to Site Scan more than 5 times (?) within 30 seconds (?) you will get
+an error message reading 'Too many requests. Retry in 60 seconds.'. If that happens,
+the login keyword will fail (it's expecting to see the map after clicking Login). This check
+catches that issue.</doc>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>2s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:10.955" endtime="20210212 14:41:10.957"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>//div</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:10.957" endtime="20210212 14:41:20.196"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:20.197" endtime="20210212 14:41:20.200"></status>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${TOO_MANY_REQUESTS_ERROR}</arg>
+</arguments>
+<assign>
+<var>${login_request_err}</var>
+</assign>
+<msg timestamp="20210212 14:41:20.296" level="INFO">${login_request_err} = 0</msg>
+<status status="PASS" starttime="20210212 14:41:20.200" endtime="20210212 14:41:20.297"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}-- 'Too Many Login requests error' count = ${login_request_err}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:20.298" endtime="20210212 14:41:20.302"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${login_request_err} == 0</arg>
+</arguments>
+<msg timestamp="20210212 14:41:20.304" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210212 14:41:20.303" endtime="20210212 14:41:20.305"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:10.953" endtime="20210212 14:41:20.305"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:08.637" endtime="20210212 14:41:20.306"></status>
+</kw>
+<kw name="Navigate To Org" library="user_keywords">
+<doc>Navigates to an Organization. It requires the name the org.</doc>
+<arguments>
+<arg>${WEB_AUTOMATION_ORG_NAME}</arg>
+</arguments>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${set_org_variable}, '${org_name}')]</arg>
+</arguments>
+<assign>
+<var>${org}</var>
+</assign>
+<msg timestamp="20210212 14:41:20.310" level="INFO">${org} = //div[contains(@class, 'org-item')]//*[contains(text(), 'Web Test Automation [Do not modify]')]</msg>
+<status status="PASS" starttime="20210212 14:41:20.308" endtime="20210212 14:41:20.310"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Navigating to organization '${org_name}'</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:20.311" endtime="20210212 14:41:20.312"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${SS_URL}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:20.313" level="INFO">Opening url 'https://staging.stscn.net/'</msg>
+<status status="PASS" starttime="20210212 14:41:20.312" endtime="20210212 14:41:21.974"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${SITE_SCAN_ICON_TAB}</arg>
+<arg>10s</arg>
+<arg>Site Scan sidebar icon not visible. Was the sidebar open?</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:21.975" endtime="20210212 14:41:23.154"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>1 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:23.155" endtime="20210212 14:41:23.156"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_TRIGGER}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:23.156" endtime="20210212 14:41:24.252"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_TRIGGER}</arg>
+<arg>10s</arg>
+<arg>Org button not visible. Was the sidebar open?</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:24.253" endtime="20210212 14:41:27.048"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_TRIGGER}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:27.050" level="INFO">Clicking element '//*[@data-test = 'account-menu-trigger']'.</msg>
+<status status="PASS" starttime="20210212 14:41:27.049" endtime="20210212 14:41:29.995"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:29.996" endtime="20210212 14:41:29.997"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${SWITCH_ORG_BUTTON}</arg>
+<arg>10s</arg>
+<arg>Switch org link not visible</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:29.997" endtime="20210212 14:41:30.264"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${SWITCH_ORG_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:30.267" level="INFO">Clicking element '//*[@data-test = 'switch-org-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:30.265" endtime="20210212 14:41:30.891"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${org}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:30.892" endtime="20210212 14:41:31.567"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${org}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:31.568" level="INFO">Clicking element '//div[contains(@class, 'org-item')]//*[contains(text(), 'Web Test Automation [Do not modify]')]'.</msg>
+<status status="PASS" starttime="20210212 14:41:31.567" endtime="20210212 14:41:31.776"></status>
+</kw>
+<kw name="_account menu overlay check" library="user_keywords">
+<doc>Private keyword to support the Navigate to Org keyword. It checks for the ACCOUNT_MENU_OVERLAY's
+presence and click's on it if there. Otherwise, it does nothing.</doc>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_OVERLAY}</arg>
+</arguments>
+<assign>
+<var>${menu_overlay}</var>
+</assign>
+<msg timestamp="20210212 14:41:31.830" level="INFO">${menu_overlay} = 0</msg>
+<status status="PASS" starttime="20210212 14:41:31.779" endtime="20210212 14:41:31.830"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${menu_overlay} == 0</arg>
+</arguments>
+<msg timestamp="20210212 14:41:31.832" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210212 14:41:31.831" endtime="20210212 14:41:31.833"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:31.777" endtime="20210212 14:41:31.833"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:20.306" endtime="20210212 14:41:31.834"></status>
+</kw>
+<kw name="Delete Project" library="user_keywords">
+<doc>Checks if project exists and deletes it if true.</doc>
+<arguments>
+<arg>${project_name}</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Attempting to delete project ${project_name}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:31.836" endtime="20210212 14:41:31.837"></status>
+</kw>
+<kw name="Check That The Project Exists" library="user_keywords">
+<doc>Checks that a project in a particular org exists and returns a number that represents the times
+that the project was found.</doc>
+<arguments>
+<arg>${project_name}</arg>
+</arguments>
+<assign>
+<var>${project_exist}</var>
+</assign>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${PROJECTS_TAB}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:31.840" endtime="20210212 14:41:31.954"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECTS_TAB}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:31.955" level="INFO">Clicking element '//*[@data-test='organization-projects-tab']'.</msg>
+<status status="PASS" starttime="20210212 14:41:31.954" endtime="20210212 14:41:32.136"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Checking if project ${project_name} exists...</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:32.136" endtime="20210212 14:41:32.138"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>2s</arg>
+<arg>${ATLAS_PROJECTS_LIST}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:32.140" endtime="20210212 14:41:32.142"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:32.142" endtime="20210212 14:41:38.522"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:38.523" endtime="20210212 14:41:38.524"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:32.138" endtime="20210212 14:41:38.524"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>//*[text() = '${project_name}']</arg>
+</arguments>
+<assign>
+<var>${project_list_item}</var>
+</assign>
+<msg timestamp="20210212 14:41:38.526" level="INFO">${project_list_item} = //*[text() = 'New Project Delete']</msg>
+<status status="PASS" starttime="20210212 14:41:38.525" endtime="20210212 14:41:38.526"></status>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${project_list_item}</arg>
+</arguments>
+<assign>
+<var>${count}</var>
+</assign>
+<msg timestamp="20210212 14:41:38.569" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20210212 14:41:38.526" endtime="20210212 14:41:38.569"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${count} == 0</arg>
+<arg>Log To Console</arg>
+<arg>-- There is no project name that matches!</arg>
+<arg>ELSE</arg>
+<arg>Log To Console</arg>
+<arg>-- There are "${count}" matches with ${project_name} project name!</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- There is no project name that matches!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:38.571" endtime="20210212 14:41:38.572"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:38.569" endtime="20210212 14:41:38.572"></status>
+</kw>
+<msg timestamp="20210212 14:41:38.573" level="INFO">${project_exist} = 0</msg>
+<status status="PASS" starttime="20210212 14:41:31.838" endtime="20210212 14:41:38.573"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${project_exist} == 0</arg>
+</arguments>
+<msg timestamp="20210212 14:41:38.575" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210212 14:41:38.574" endtime="20210212 14:41:38.576"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:31.834" endtime="20210212 14:41:38.577"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECTS_TAB}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:38.578" level="INFO">Clicking element '//*[@data-test='organization-projects-tab']'.</msg>
+<status status="PASS" starttime="20210212 14:41:38.577" endtime="20210212 14:41:38.867"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ATLAS_PROJECTS_LIST}</arg>
+<arg>${none}</arg>
+<arg>ERROR: Project list not visibles</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:38.868" endtime="20210212 14:41:38.936"></status>
+</kw>
+<kw name="Assert Element Position" library="user_keywords">
+<doc>Compares the expected positions (horizontal and vertical) of an element against its current
+positions.</doc>
+<arguments>
+<arg>${ATLAS_NEW_PROJECT_BUTTON}</arg>
+<arg>${button_h}</arg>
+<arg>${button_v}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element_to_assert}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:38.940" endtime="20210212 14:41:39.022"></status>
+</kw>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${element_to_assert}</arg>
+</arguments>
+<assign>
+<var>${get_h_position}</var>
+</assign>
+<msg timestamp="20210212 14:41:39.082" level="INFO">${get_h_position} = 1648</msg>
+<status status="PASS" starttime="20210212 14:41:39.022" endtime="20210212 14:41:39.083"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${expected_h_position} != ${get_h_position}</arg>
+<arg>Fail</arg>
+<arg>The element: ${element_to_assert} is not were it should be (H).</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:39.083" endtime="20210212 14:41:39.084"></status>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${element_to_assert}</arg>
+</arguments>
+<assign>
+<var>${get_v_position}</var>
+</assign>
+<msg timestamp="20210212 14:41:39.142" level="INFO">${get_v_position} = 96</msg>
+<status status="PASS" starttime="20210212 14:41:39.085" endtime="20210212 14:41:39.142"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${expected_v_position} != ${get_v_position}</arg>
+<arg>Fail</arg>
+<arg>The element: ${element_to_assert} is not were it should be (V).</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:39.143" endtime="20210212 14:41:39.145"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:38.937" endtime="20210212 14:41:39.146"></status>
+</kw>
+<kw name="Open Eyes" library="RobotEyes">
+<arguments>
+<arg>SeleniumLibrary</arg>
+<arg>0.01</arg>
+</arguments>
+<msg timestamp="20210212 14:41:39.451" level="INFO">New_Project</msg>
+<status status="PASS" starttime="20210212 14:41:39.147" endtime="20210212 14:41:39.452"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}TEST SETUP &lt;==</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:39.453" endtime="20210212 14:41:39.455"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:40:37.042" endtime="20210212 14:41:39.456"></status>
+</kw>
+<kw name="Click New Project And Back Buttons">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Click New Project And Back Buttons</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:39.460" endtime="20210212 14:41:39.463"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${PROJECT_ROWS}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:39.465" endtime="20210212 14:41:39.607"></status>
+</kw>
+<kw name="Get Project List">
+<doc>Gets all the projects into a string by getting the text of every row that contains the
+data-test 'projects-rows'.</doc>
+<assign>
+<var>${initial_project_list}</var>
+</assign>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${cnt}</var>
+</assign>
+<msg timestamp="20210212 14:41:39.661" level="INFO">${cnt} = 25</msg>
+<status status="PASS" starttime="20210212 14:41:39.612" endtime="20210212 14:41:39.662"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<assign>
+<var>${values}</var>
+</assign>
+<msg timestamp="20210212 14:41:39.664" level="INFO">${values} = []</msg>
+<status status="PASS" starttime="20210212 14:41:39.663" endtime="20210212 14:41:39.664"></status>
+</kw>
+<kw name="${i} IN RANGE [ 3 | ${cnt} + 3 ]" type="for">
+<kw name="${i} = 3" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:39.839" level="INFO">${value} = 1 Full Reg TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:39.668" endtime="20210212 14:41:39.840"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:39.842" endtime="20210212 14:41:39.845"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:39.666" endtime="20210212 14:41:39.846"></status>
+</kw>
+<kw name="${i} = 4" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:40.009" level="INFO">${value} = Cut&amp;Fill TEST - Roloff - Indian Port CopyAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:39.847" endtime="20210212 14:41:40.009"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:40.010" endtime="20210212 14:41:40.012"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:39.846" endtime="20210212 14:41:40.012"></status>
+</kw>
+<kw name="${i} = 5" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:40.201" level="INFO">${value} = Flights Page - Edit Flight PicturesAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:40.013" endtime="20210212 14:41:40.201"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:40.202" endtime="20210212 14:41:40.208"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:40.012" endtime="20210212 14:41:40.208"></status>
+</kw>
+<kw name="${i} = 6" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:40.389" level="INFO">${value} = Fullscreen viewerAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:40.211" endtime="20210212 14:41:40.390"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:40.391" endtime="20210212 14:41:40.393"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:40.210" endtime="20210212 14:41:40.394"></status>
+</kw>
+<kw name="${i} = 7" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:40.579" level="INFO">${value} = Juan Flight CopyAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:40.397" endtime="20210212 14:41:40.579"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:40.580" endtime="20210212 14:41:40.586"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:40.396" endtime="20210212 14:41:40.586"></status>
+</kw>
+<kw name="${i} = 8" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:40.768" level="INFO">${value} = M2pAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:40.587" endtime="20210212 14:41:40.768"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:40.770" endtime="20210212 14:41:40.771"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:40.587" endtime="20210212 14:41:40.771"></status>
+</kw>
+<kw name="${i} = 9" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:40.930" level="INFO">${value} = Measurement UnitsAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:40.774" endtime="20210212 14:41:40.930"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:40.931" endtime="20210212 14:41:40.933"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:40.772" endtime="20210212 14:41:40.933"></status>
+</kw>
+<kw name="${i} = 10" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.034" level="INFO">${value} = Measurements Edit NameAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:40.934" endtime="20210212 14:41:41.034"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.035" endtime="20210212 14:41:41.036"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:40.933" endtime="20210212 14:41:41.036"></status>
+</kw>
+<kw name="${i} = 11" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.157" level="INFO">${value} = Multipurpose - Missouri History MuseumAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.037" endtime="20210212 14:41:41.157"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.158" endtime="20210212 14:41:41.159"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.036" endtime="20210212 14:41:41.159"></status>
+</kw>
+<kw name="${i} = 12" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.261" level="INFO">${value} = OverlaysAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.160" endtime="20210212 14:41:41.261"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.262" endtime="20210212 14:41:41.263"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.160" endtime="20210212 14:41:41.263"></status>
+</kw>
+<kw name="${i} = 13" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.369" level="INFO">${value} = Project 1 Meters 0Administrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.264" endtime="20210212 14:41:41.369"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.370" endtime="20210212 14:41:41.371"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.263" endtime="20210212 14:41:41.372"></status>
+</kw>
+<kw name="${i} = 14" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.472" level="INFO">${value} = Project 2 Std Foot 90Administrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.372" endtime="20210212 14:41:41.473"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.473" endtime="20210212 14:41:41.474"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.372" endtime="20210212 14:41:41.474"></status>
+</kw>
+<kw name="${i} = 15" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.573" level="INFO">${value} = Project 3 BK US Foot 180Administrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.475" endtime="20210212 14:41:41.573"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.573" endtime="20210212 14:41:41.575"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.475" endtime="20210212 14:41:41.576"></status>
+</kw>
+<kw name="${i} = 16" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.672" level="INFO">${value} = Project Page - Edit Flight PicturesAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.577" endtime="20210212 14:41:41.673"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.673" endtime="20210212 14:41:41.674"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.577" endtime="20210212 14:41:41.674"></status>
+</kw>
+<kw name="${i} = 17" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.770" level="INFO">${value} = Sandbox: DiegoAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.675" endtime="20210212 14:41:41.771"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.771" endtime="20210212 14:41:41.772"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.675" endtime="20210212 14:41:41.772"></status>
+</kw>
+<kw name="${i} = 18" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.873" level="INFO">${value} = Sandbox: JuanAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.773" endtime="20210212 14:41:41.873"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.874" endtime="20210212 14:41:41.875"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.773" endtime="20210212 14:41:41.875"></status>
+</kw>
+<kw name="${i} = 19" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:41.979" level="INFO">${value} = Scroll Through Flight TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.876" endtime="20210212 14:41:41.979"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:41.980" endtime="20210212 14:41:41.982"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.875" endtime="20210212 14:41:41.982"></status>
+</kw>
+<kw name="${i} = 20" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.086" level="INFO">${value} = Tijuana Cluster TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:41.983" endtime="20210212 14:41:42.086"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.087" endtime="20210212 14:41:42.088"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:41.983" endtime="20210212 14:41:42.088"></status>
+</kw>
+<kw name="${i} = 21" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.188" level="INFO">${value} = Tijuana Edit FlightAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.089" endtime="20210212 14:41:42.188"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.189" endtime="20210212 14:41:42.191"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.088" endtime="20210212 14:41:42.191"></status>
+</kw>
+<kw name="${i} = 22" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.289" level="INFO">${value} = Tijuana Edit ProjectAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.192" endtime="20210212 14:41:42.289"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.290" endtime="20210212 14:41:42.291"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.191" endtime="20210212 14:41:42.291"></status>
+</kw>
+<kw name="${i} = 23" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.389" level="INFO">${value} = Tijuana Flights TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.292" endtime="20210212 14:41:42.389"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.389" endtime="20210212 14:41:42.391"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.292" endtime="20210212 14:41:42.391"></status>
+</kw>
+<kw name="${i} = 24" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.506" level="INFO">${value} = Tijuana GCP TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.392" endtime="20210212 14:41:42.506"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.506" endtime="20210212 14:41:42.508"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.391" endtime="20210212 14:41:42.508"></status>
+</kw>
+<kw name="${i} = 25" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.607" level="INFO">${value} = Tijuana New Flight TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.509" endtime="20210212 14:41:42.608"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.609" endtime="20210212 14:41:42.611"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.508" endtime="20210212 14:41:42.611"></status>
+</kw>
+<kw name="${i} = 26" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.708" level="INFO">${value} = Tijuana Switch FlightsAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.612" endtime="20210212 14:41:42.708"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.708" endtime="20210212 14:41:42.710"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.611" endtime="20210212 14:41:42.710"></status>
+</kw>
+<kw name="${i} = 27" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:42.812" level="INFO">${value} = Tijuana Upload GCPsAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:42.711" endtime="20210212 14:41:42.812"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.813" endtime="20210212 14:41:42.814"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.710" endtime="20210212 14:41:42.814"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:39.664" endtime="20210212 14:41:42.814"></status>
+</kw>
+<msg timestamp="20210212 14:41:42.815" level="INFO">${initial_project_list} = ['1 Full Reg TestAdministrator', 'Cut&amp;Fill TEST - Roloff - Indian Port CopyAdministrator', 'Flights Page - Edit Flight PicturesAdministrator', 'Fullscreen viewerAdministrator', 'Juan Flight CopyAdmini...</msg>
+<status status="PASS" starttime="20210212 14:41:39.608" endtime="20210212 14:41:42.815"></status>
+</kw>
+<kw name="Click The Add New Project Button" library="user_keywords">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ATLAS_NEW_PROJECT_BUTTON}</arg>
+<arg>${none}</arg>
+<arg>Add New Project button not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:42.817" endtime="20210212 14:41:42.884"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>${ATLAS_NEW_PROJECT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:42.885" level="INFO">Clicking button '//*[@data-test = 'atlas-new-project-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:42.884" endtime="20210212 14:41:43.192"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ADD_NEW_PROJECT_HEADER}</arg>
+<arg>${none}</arg>
+<arg>Add New Project header not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:43.193" endtime="20210212 14:41:43.634"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${EDIT_PROJECT_MODAL_PROJECT_NAME}</arg>
+<arg>15s</arg>
+<arg>-- Add New Project Name not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:43.635" endtime="20210212 14:41:43.724"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:42.816" endtime="20210212 14:41:43.725"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_FORM_BACK_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:43.726" level="INFO">Clicking button '//*[@data-test = 'project-form-back-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:43.725" endtime="20210212 14:41:44.267"></status>
+</kw>
+<kw name="Get Project List">
+<doc>Gets all the projects into a string by getting the text of every row that contains the
+data-test 'projects-rows'.</doc>
+<assign>
+<var>${current_project_list}</var>
+</assign>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${cnt}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.303" level="INFO">${cnt} = 25</msg>
+<status status="PASS" starttime="20210212 14:41:44.270" endtime="20210212 14:41:44.304"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<assign>
+<var>${values}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.305" level="INFO">${values} = []</msg>
+<status status="PASS" starttime="20210212 14:41:44.304" endtime="20210212 14:41:44.305"></status>
+</kw>
+<kw name="${i} IN RANGE [ 3 | ${cnt} + 3 ]" type="for">
+<kw name="${i} = 3" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.404" level="INFO">${value} = 1 Full Reg TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.307" endtime="20210212 14:41:44.405"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:44.408" endtime="20210212 14:41:44.409"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.307" endtime="20210212 14:41:44.409"></status>
+</kw>
+<kw name="${i} = 4" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.625" level="INFO">${value} = Cut&amp;Fill TEST - Roloff - Indian Port CopyAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.410" endtime="20210212 14:41:44.625"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:44.626" endtime="20210212 14:41:44.627"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.410" endtime="20210212 14:41:44.627"></status>
+</kw>
+<kw name="${i} = 5" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.710" level="INFO">${value} = Flights Page - Edit Flight PicturesAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.628" endtime="20210212 14:41:44.711"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:44.711" endtime="20210212 14:41:44.712"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.627" endtime="20210212 14:41:44.713"></status>
+</kw>
+<kw name="${i} = 6" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.798" level="INFO">${value} = Fullscreen viewerAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.714" endtime="20210212 14:41:44.798"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:44.799" endtime="20210212 14:41:44.800"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.713" endtime="20210212 14:41:44.800"></status>
+</kw>
+<kw name="${i} = 7" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.897" level="INFO">${value} = Juan Flight CopyAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.801" endtime="20210212 14:41:44.898"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:44.898" endtime="20210212 14:41:44.900"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.800" endtime="20210212 14:41:44.900"></status>
+</kw>
+<kw name="${i} = 8" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:44.986" level="INFO">${value} = M2pAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.901" endtime="20210212 14:41:44.986"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:44.987" endtime="20210212 14:41:44.988"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.901" endtime="20210212 14:41:44.988"></status>
+</kw>
+<kw name="${i} = 9" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.074" level="INFO">${value} = Measurement UnitsAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:44.989" endtime="20210212 14:41:45.074"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.075" endtime="20210212 14:41:45.076"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.988" endtime="20210212 14:41:45.076"></status>
+</kw>
+<kw name="${i} = 10" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.162" level="INFO">${value} = Measurements Edit NameAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.077" endtime="20210212 14:41:45.162"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.163" endtime="20210212 14:41:45.164"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.077" endtime="20210212 14:41:45.164"></status>
+</kw>
+<kw name="${i} = 11" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.270" level="INFO">${value} = Multipurpose - Missouri History MuseumAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.165" endtime="20210212 14:41:45.271"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.271" endtime="20210212 14:41:45.273"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.164" endtime="20210212 14:41:45.273"></status>
+</kw>
+<kw name="${i} = 12" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.391" level="INFO">${value} = OverlaysAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.274" endtime="20210212 14:41:45.392"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.393" endtime="20210212 14:41:45.394"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.273" endtime="20210212 14:41:45.395"></status>
+</kw>
+<kw name="${i} = 13" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.491" level="INFO">${value} = Project 1 Meters 0Administrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.396" endtime="20210212 14:41:45.491"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.492" endtime="20210212 14:41:45.493"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.395" endtime="20210212 14:41:45.493"></status>
+</kw>
+<kw name="${i} = 14" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.578" level="INFO">${value} = Project 2 Std Foot 90Administrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.494" endtime="20210212 14:41:45.578"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.578" endtime="20210212 14:41:45.580"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.493" endtime="20210212 14:41:45.580"></status>
+</kw>
+<kw name="${i} = 15" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.662" level="INFO">${value} = Project 3 BK US Foot 180Administrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.581" endtime="20210212 14:41:45.662"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.663" endtime="20210212 14:41:45.665"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.581" endtime="20210212 14:41:45.665"></status>
+</kw>
+<kw name="${i} = 16" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.749" level="INFO">${value} = Project Page - Edit Flight PicturesAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.666" endtime="20210212 14:41:45.750"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.750" endtime="20210212 14:41:45.751"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.666" endtime="20210212 14:41:45.752"></status>
+</kw>
+<kw name="${i} = 17" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.838" level="INFO">${value} = Sandbox: DiegoAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.752" endtime="20210212 14:41:45.838"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.838" endtime="20210212 14:41:45.840"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.752" endtime="20210212 14:41:45.840"></status>
+</kw>
+<kw name="${i} = 18" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:45.922" level="INFO">${value} = Sandbox: JuanAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.840" endtime="20210212 14:41:45.923"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:45.923" endtime="20210212 14:41:45.924"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.840" endtime="20210212 14:41:45.924"></status>
+</kw>
+<kw name="${i} = 19" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.013" level="INFO">${value} = Scroll Through Flight TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:45.925" endtime="20210212 14:41:46.013"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.014" endtime="20210212 14:41:46.015"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:45.925" endtime="20210212 14:41:46.015"></status>
+</kw>
+<kw name="${i} = 20" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.108" level="INFO">${value} = Tijuana Cluster TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.016" endtime="20210212 14:41:46.109"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.110" endtime="20210212 14:41:46.111"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.016" endtime="20210212 14:41:46.111"></status>
+</kw>
+<kw name="${i} = 21" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.196" level="INFO">${value} = Tijuana Edit FlightAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.112" endtime="20210212 14:41:46.196"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.197" endtime="20210212 14:41:46.198"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.111" endtime="20210212 14:41:46.198"></status>
+</kw>
+<kw name="${i} = 22" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.282" level="INFO">${value} = Tijuana Edit ProjectAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.199" endtime="20210212 14:41:46.282"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.283" endtime="20210212 14:41:46.284"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.198" endtime="20210212 14:41:46.284"></status>
+</kw>
+<kw name="${i} = 23" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.389" level="INFO">${value} = Tijuana Flights TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.285" endtime="20210212 14:41:46.389"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.390" endtime="20210212 14:41:46.391"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.285" endtime="20210212 14:41:46.391"></status>
+</kw>
+<kw name="${i} = 24" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.478" level="INFO">${value} = Tijuana GCP TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.392" endtime="20210212 14:41:46.479"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.479" endtime="20210212 14:41:46.481"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.392" endtime="20210212 14:41:46.481"></status>
+</kw>
+<kw name="${i} = 25" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.575" level="INFO">${value} = Tijuana New Flight TestAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.482" endtime="20210212 14:41:46.577"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.578" endtime="20210212 14:41:46.579"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.482" endtime="20210212 14:41:46.579"></status>
+</kw>
+<kw name="${i} = 26" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.665" level="INFO">${value} = Tijuana Switch FlightsAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.580" endtime="20210212 14:41:46.665"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.666" endtime="20210212 14:41:46.667"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.580" endtime="20210212 14:41:46.667"></status>
+</kw>
+<kw name="${i} = 27" type="foritem">
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[${i}]/div[2]${PROJECT_ROWS}</arg>
+</arguments>
+<assign>
+<var>${value}</var>
+</assign>
+<msg timestamp="20210212 14:41:46.751" level="INFO">${value} = Tijuana Upload GCPsAdministrator</msg>
+<status status="PASS" starttime="20210212 14:41:46.668" endtime="20210212 14:41:46.751"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${values}</arg>
+<arg>${value}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.752" endtime="20210212 14:41:46.753"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.668" endtime="20210212 14:41:46.753"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:44.306" endtime="20210212 14:41:46.753"></status>
+</kw>
+<msg timestamp="20210212 14:41:46.754" level="INFO">${current_project_list} = ['1 Full Reg TestAdministrator', 'Cut&amp;Fill TEST - Roloff - Indian Port CopyAdministrator', 'Flights Page - Edit Flight PicturesAdministrator', 'Fullscreen viewerAdministrator', 'Juan Flight CopyAdmini...</msg>
+<status status="PASS" starttime="20210212 14:41:44.268" endtime="20210212 14:41:46.754"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${initial_project_list}</arg>
+<arg>${current_project_list}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.755" endtime="20210212 14:41:46.756"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:39.458" endtime="20210212 14:41:46.757"></status>
+</kw>
+<kw name="No Name And Click Next">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- No Name And Click Next</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.759" endtime="20210212 14:41:46.760"></status>
+</kw>
+<kw name="Click The Add New Project Button" library="user_keywords">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ATLAS_NEW_PROJECT_BUTTON}</arg>
+<arg>${none}</arg>
+<arg>Add New Project button not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:46.762" endtime="20210212 14:41:46.830"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>${ATLAS_NEW_PROJECT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:46.832" level="INFO">Clicking button '//*[@data-test = 'atlas-new-project-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:46.831" endtime="20210212 14:41:47.103"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ADD_NEW_PROJECT_HEADER}</arg>
+<arg>${none}</arg>
+<arg>Add New Project header not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.104" endtime="20210212 14:41:47.189"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${EDIT_PROJECT_MODAL_PROJECT_NAME}</arg>
+<arg>15s</arg>
+<arg>-- Add New Project Name not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.190" endtime="20210212 14:41:47.261"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.761" endtime="20210212 14:41:47.262"></status>
+</kw>
+<kw name="Click The Next Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Next" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.264" endtime="20210212 14:41:47.365"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.366" endtime="20210212 14:41:47.449"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:47.451" level="INFO">Clicking element '//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:47.450" endtime="20210212 14:41:47.659"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:47.263" endtime="20210212 14:41:47.660"></status>
+</kw>
+<kw name="Assert Text" library="user_keywords">
+<doc>Get element's text and assert if it's equal to a given/expected text, this by giving it the
+XPath of the element and the actual text that it's expected.</doc>
+<arguments>
+<arg>${VALID_PROJECT_NAME_ERR}</arg>
+<arg>${invalid_name_msg}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+<arg>-- The element ${element} wasn't visible.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.663" endtime="20210212 14:41:47.783"></status>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${element}</arg>
+</arguments>
+<assign>
+<var>${element_text}</var>
+</assign>
+<msg timestamp="20210212 14:41:47.890" level="INFO">${element_text} = Please enter a valid project name.</msg>
+<status status="PASS" starttime="20210212 14:41:47.784" endtime="20210212 14:41:47.891"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${element_text}</arg>
+<arg>${actual_text}</arg>
+<arg>-- The element text "${element_text}" didn't match the expected one "${actual_text}"</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.891" endtime="20210212 14:41:47.893"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:47.661" endtime="20210212 14:41:47.894"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:46.758" endtime="20210212 14:41:47.894"></status>
+</kw>
+<kw name="Input White-spaces For Project Name And Click Next">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Input White-spaces For Project Name And Click Next</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:47.896" endtime="20210212 14:41:47.898"></status>
+</kw>
+<kw name="Repeat Keyword" library="BuiltIn">
+<doc>Executes the specified keyword multiple times.</doc>
+<arguments>
+<arg>4 times</arg>
+<arg>Press Keys</arg>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>SPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:47.901" level="INFO">Repeating keyword, round 1/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>SPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:47.905" level="INFO">Sending key(s) ('SPACE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:48.258" level="INFO">Pressing special key SPACE to element.</msg>
+<msg timestamp="20210212 14:41:48.259" level="INFO">Releasing special key SPACE.</msg>
+<status status="PASS" starttime="20210212 14:41:47.902" endtime="20210212 14:41:48.309"></status>
+</kw>
+<msg timestamp="20210212 14:41:48.310" level="INFO">Repeating keyword, round 2/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>SPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:48.314" level="INFO">Sending key(s) ('SPACE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:48.650" level="INFO">Pressing special key SPACE to element.</msg>
+<msg timestamp="20210212 14:41:48.651" level="INFO">Releasing special key SPACE.</msg>
+<status status="PASS" starttime="20210212 14:41:48.311" endtime="20210212 14:41:48.693"></status>
+</kw>
+<msg timestamp="20210212 14:41:48.693" level="INFO">Repeating keyword, round 3/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>SPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:48.697" level="INFO">Sending key(s) ('SPACE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:49.034" level="INFO">Pressing special key SPACE to element.</msg>
+<msg timestamp="20210212 14:41:49.034" level="INFO">Releasing special key SPACE.</msg>
+<status status="PASS" starttime="20210212 14:41:48.694" endtime="20210212 14:41:49.075"></status>
+</kw>
+<msg timestamp="20210212 14:41:49.075" level="INFO">Repeating keyword, round 4/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>SPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:49.079" level="INFO">Sending key(s) ('SPACE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:49.419" level="INFO">Pressing special key SPACE to element.</msg>
+<msg timestamp="20210212 14:41:49.420" level="INFO">Releasing special key SPACE.</msg>
+<status status="PASS" starttime="20210212 14:41:49.076" endtime="20210212 14:41:49.459"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:47.900" endtime="20210212 14:41:49.459"></status>
+</kw>
+<kw name="Click The Next Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Next" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:49.462" endtime="20210212 14:41:49.537"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:49.538" endtime="20210212 14:41:49.609"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:49.611" level="INFO">Clicking element '//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:49.610" endtime="20210212 14:41:49.746"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:49.460" endtime="20210212 14:41:49.747"></status>
+</kw>
+<kw name="Assert Text" library="user_keywords">
+<doc>Get element's text and assert if it's equal to a given/expected text, this by giving it the
+XPath of the element and the actual text that it's expected.</doc>
+<arguments>
+<arg>${VALID_PROJECT_NAME_ERR}</arg>
+<arg>${invalid_name_msg}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+<arg>-- The element ${element} wasn't visible.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:49.751" endtime="20210212 14:41:49.850"></status>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${element}</arg>
+</arguments>
+<assign>
+<var>${element_text}</var>
+</assign>
+<msg timestamp="20210212 14:41:49.956" level="INFO">${element_text} = Please enter a valid project name.</msg>
+<status status="PASS" starttime="20210212 14:41:49.851" endtime="20210212 14:41:49.956"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${element_text}</arg>
+<arg>${actual_text}</arg>
+<arg>-- The element text "${element_text}" didn't match the expected one "${actual_text}"</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:49.957" endtime="20210212 14:41:49.960"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:49.748" endtime="20210212 14:41:49.961"></status>
+</kw>
+<kw name="Repeat Keyword" library="BuiltIn">
+<doc>Executes the specified keyword multiple times.</doc>
+<arguments>
+<arg>4 times</arg>
+<arg>Press Keys</arg>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>DELETE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:49.967" level="INFO">Repeating keyword, round 1/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>DELETE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:49.971" level="INFO">Sending key(s) ('DELETE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:50.307" level="INFO">Pressing special key DELETE to element.</msg>
+<msg timestamp="20210212 14:41:50.307" level="INFO">Releasing special key DELETE.</msg>
+<status status="PASS" starttime="20210212 14:41:49.968" endtime="20210212 14:41:50.353"></status>
+</kw>
+<msg timestamp="20210212 14:41:50.353" level="INFO">Repeating keyword, round 2/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>DELETE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:50.357" level="INFO">Sending key(s) ('DELETE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:50.685" level="INFO">Pressing special key DELETE to element.</msg>
+<msg timestamp="20210212 14:41:50.685" level="INFO">Releasing special key DELETE.</msg>
+<status status="PASS" starttime="20210212 14:41:50.354" endtime="20210212 14:41:50.726"></status>
+</kw>
+<msg timestamp="20210212 14:41:50.727" level="INFO">Repeating keyword, round 3/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>DELETE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:50.730" level="INFO">Sending key(s) ('DELETE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:51.065" level="INFO">Pressing special key DELETE to element.</msg>
+<msg timestamp="20210212 14:41:51.066" level="INFO">Releasing special key DELETE.</msg>
+<status status="PASS" starttime="20210212 14:41:50.728" endtime="20210212 14:41:51.090"></status>
+</kw>
+<msg timestamp="20210212 14:41:51.091" level="INFO">Repeating keyword, round 4/4.</msg>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>DELETE</arg>
+</arguments>
+<msg timestamp="20210212 14:41:51.095" level="INFO">Sending key(s) ('DELETE',) to //*[@data-test = 'project-name-input'] element.</msg>
+<msg timestamp="20210212 14:41:51.415" level="INFO">Pressing special key DELETE to element.</msg>
+<msg timestamp="20210212 14:41:51.416" level="INFO">Releasing special key DELETE.</msg>
+<status status="PASS" starttime="20210212 14:41:51.091" endtime="20210212 14:41:51.437"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:49.965" endtime="20210212 14:41:51.438"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:47.895" endtime="20210212 14:41:51.438"></status>
+</kw>
+<kw name="Navigate To The Set-Location Page And Click Cancel">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Navigate To The Set-Location Page And Click Cancel</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:51.442" endtime="20210212 14:41:51.443"></status>
+</kw>
+<kw name="Input Project Name" library="user_keywords">
+<doc>Inputs a valid project name into the name input</doc>
+<arguments>
+<arg>${project_name}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:51.446" endtime="20210212 14:41:51.511"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_NAME_INPUT}</arg>
+<arg>${project_name}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:51.513" level="INFO">Typing text 'New Project Delete' into text field '//*[@data-test = 'project-name-input']'.</msg>
+<status status="PASS" starttime="20210212 14:41:51.512" endtime="20210212 14:41:51.953"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:51.443" endtime="20210212 14:41:51.954"></status>
+</kw>
+<kw name="Click The Next Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Next" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:51.957" endtime="20210212 14:41:52.031"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:52.032" endtime="20210212 14:41:52.103"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:52.104" level="INFO">Clicking element '//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:52.103" endtime="20210212 14:41:52.268"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:51.955" endtime="20210212 14:41:52.269"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${SET_LOCATION_PAGE_HEADER}</arg>
+<arg>${none}</arg>
+<arg>${location_page_not_visible}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:52.269" endtime="20210212 14:41:52.700"></status>
+</kw>
+<kw name="Click The Cancel Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Cancel" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${CANCEL_BUTTON}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:52.702" endtime="20210212 14:41:52.787"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${CANCEL_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:52.789" level="INFO">Clicking element '//button[@data-test = 'cancel-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:52.788" endtime="20210212 14:41:54.324"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:52.700" endtime="20210212 14:41:54.326"></status>
+</kw>
+<kw name="Check The Set-Location Page Closed">
+<kw name="Element Should Not Be Visible" library="SeleniumLibrary">
+<doc>Verifies that the element identified by ``locator`` is NOT visible.</doc>
+<arguments>
+<arg>${SET_LOCATION_PAGE_HEADER}</arg>
+<arg>ERROR: The Set-Location header was visible!</arg>
+</arguments>
+<msg timestamp="20210212 14:41:54.454" level="INFO">Element '//*[@data-test='set-location-header']' did not exist.</msg>
+<status status="PASS" starttime="20210212 14:41:54.330" endtime="20210212 14:41:54.454"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ADD_NEW_PROJECT_HEADER}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:54.455" endtime="20210212 14:41:54.541"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:54.327" endtime="20210212 14:41:54.542"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:51.440" endtime="20210212 14:41:54.543"></status>
+</kw>
+<kw name="Location Zoom In To Map">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Location Zoom In To Map</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:54.546" endtime="20210212 14:41:54.548"></status>
+</kw>
+<kw name="Click The Next Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Next" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:54.552" endtime="20210212 14:41:54.775"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:54.776" endtime="20210212 14:41:54.956"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:41:54.959" level="INFO">Clicking element '//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:41:54.957" endtime="20210212 14:41:55.223"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:54.549" endtime="20210212 14:41:55.225"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>2s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:55.226" endtime="20210212 14:41:55.228"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>${none}</arg>
+<arg>${canvas_not_visible}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:55.229" endtime="20210212 14:41:59.920"></status>
+</kw>
+<kw name="Capture Element" library="RobotEyes">
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>0.01</arg>
+<arg>${NEW_PROJECT_CANVAS_NAVIGATION_BAR}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:41:59.921" endtime="20210212 14:42:10.286"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:10.288" endtime="20210212 14:42:10.289"></status>
+</kw>
+<kw name="Input Project Location" library="user_keywords">
+<doc>Inputs a valid project location into the location input</doc>
+<arguments>
+<arg>${project_location}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${LOCATION_INPUT}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:10.292" endtime="20210212 14:42:10.371"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${LOCATION_INPUT}</arg>
+<arg>${location}</arg>
+</arguments>
+<msg timestamp="20210212 14:42:10.373" level="INFO">Typing text 'Los Angeles' into text field '//*[@data-test = 'location-input']'.</msg>
+<status status="PASS" starttime="20210212 14:42:10.372" endtime="20210212 14:42:10.828"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:10.289" endtime="20210212 14:42:10.829"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>//*[contains(@class,"Dropdown")]</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:10.830" endtime="20210212 14:42:11.206"></status>
+</kw>
+<kw name="Select Location From Dropdown" library="user_keywords">
+<doc>Selects the FIRST location option in the dropdown</doc>
+<arguments>
+<arg>${project_location}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>//div[contains(text(), '${location}')][1]</arg>
+<arg>10s</arg>
+<arg>-- Location ${location} is not an option!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:11.209" endtime="20210212 14:42:11.286"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[contains(text(), '${location}')][1]</arg>
+</arguments>
+<msg timestamp="20210212 14:42:11.288" level="INFO">Clicking element '//div[contains(text(), 'Los Angeles')][1]'.</msg>
+<status status="PASS" starttime="20210212 14:42:11.287" endtime="20210212 14:42:11.583"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:11.584" endtime="20210212 14:42:11.670"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:11.206" endtime="20210212 14:42:11.670"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>8s</arg>
+<arg>${MAP_CANVAS}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:11.675" endtime="20210212 14:42:11.679"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:11.682" endtime="20210212 14:42:27.791"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:27.792" endtime="20210212 14:42:27.793"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:11.671" endtime="20210212 14:42:27.794"></status>
+</kw>
+<kw name="Capture Element" library="RobotEyes">
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>0.01</arg>
+<arg>${NEW_PROJECT_CANVAS_NAVIGATION_BAR}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:27.794" endtime="20210212 14:42:31.062"></status>
+</kw>
+<kw name="Click The Cancel Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Cancel" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${CANCEL_BUTTON}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:31.064" endtime="20210212 14:42:31.142"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${CANCEL_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:42:31.144" level="INFO">Clicking element '//button[@data-test = 'cancel-button']'.</msg>
+<status status="PASS" starttime="20210212 14:42:31.143" endtime="20210212 14:42:31.396"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:31.062" endtime="20210212 14:42:31.397"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:41:54.544" endtime="20210212 14:42:31.398"></status>
+</kw>
+<kw name="Click On The Map">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Click on the map</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:31.401" endtime="20210212 14:42:31.403"></status>
+</kw>
+<kw name="Click The Next Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Next" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:31.406" endtime="20210212 14:42:31.525"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:31.526" endtime="20210212 14:42:31.616"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:42:31.617" level="INFO">Clicking element '//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:42:31.616" endtime="20210212 14:42:32.126"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:31.404" endtime="20210212 14:42:32.127"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>2.5s</arg>
+<arg>${MAP_CANVAS}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:32.131" endtime="20210212 14:42:32.133"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:32.133" endtime="20210212 14:42:38.632"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:38.633" endtime="20210212 14:42:38.634"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:32.128" endtime="20210212 14:42:38.635"></status>
+</kw>
+<kw name="Capture Element" library="RobotEyes">
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>0.01</arg>
+<arg>${NEW_PROJECT_CANVAS_NAVIGATION_BAR}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:38.636" endtime="20210212 14:42:42.091"></status>
+</kw>
+<kw name="Get Value" library="SeleniumLibrary">
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LATITUDE_INPUT}</arg>
+</arguments>
+<assign>
+<var>${initial_lat}</var>
+</assign>
+<msg timestamp="20210212 14:42:42.153" level="INFO">${initial_lat} = 0</msg>
+<status status="PASS" starttime="20210212 14:42:42.092" endtime="20210212 14:42:42.153"></status>
+</kw>
+<kw name="Get Value" library="SeleniumLibrary">
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LONGITUDE_INPUT}</arg>
+</arguments>
+<assign>
+<var>${initial_long}</var>
+</assign>
+<msg timestamp="20210212 14:42:42.215" level="INFO">${initial_long} = 0</msg>
+<status status="PASS" starttime="20210212 14:42:42.154" endtime="20210212 14:42:42.215"></status>
+</kw>
+<kw name="Click Element At Coordinates" library="SeleniumLibrary">
+<doc>Click the element ``locator`` at ``xoffset/yoffset``.</doc>
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>-100</arg>
+<arg>100</arg>
+</arguments>
+<msg timestamp="20210212 14:42:42.217" level="INFO">Clicking element '//canvas' at coordinates x=-100, y=100.</msg>
+<status status="PASS" starttime="20210212 14:42:42.216" endtime="20210212 14:42:42.902"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:42.902" endtime="20210212 14:42:42.977"></status>
+</kw>
+<kw name="Capture Element" library="RobotEyes">
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>0.01</arg>
+<arg>${NEW_PROJECT_CANVAS_NAVIGATION_BAR}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:42.978" endtime="20210212 14:42:47.282"></status>
+</kw>
+<kw name="Get Value" library="SeleniumLibrary">
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LATITUDE_INPUT}</arg>
+</arguments>
+<assign>
+<var>${current_lat}</var>
+</assign>
+<msg timestamp="20210212 14:42:47.330" level="INFO">${current_lat} = -8.742578887524694</msg>
+<status status="PASS" starttime="20210212 14:42:47.283" endtime="20210212 14:42:47.330"></status>
+</kw>
+<kw name="Get Value" library="SeleniumLibrary">
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LONGITUDE_INPUT}</arg>
+</arguments>
+<assign>
+<var>${current_long}</var>
+</assign>
+<msg timestamp="20210212 14:42:47.380" level="INFO">${current_long} = -8.84742736816171</msg>
+<status status="PASS" starttime="20210212 14:42:47.331" endtime="20210212 14:42:47.380"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${initial_lat}'==${current_lat}</arg>
+<arg>fail</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:47.381" endtime="20210212 14:42:47.383"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${initial_long}'==${current_long}</arg>
+<arg>fail</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:47.383" endtime="20210212 14:42:47.384"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:31.399" endtime="20210212 14:42:47.385"></status>
+</kw>
+<kw name="Click Cancel And Next Again">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Closing the "Set Location Modal" and re-open it.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:47.388" endtime="20210212 14:42:47.390"></status>
+</kw>
+<kw name="Click The Cancel Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Cancel" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${CANCEL_BUTTON}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:47.392" endtime="20210212 14:42:47.458"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${CANCEL_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:42:47.460" level="INFO">Clicking element '//button[@data-test = 'cancel-button']'.</msg>
+<status status="PASS" starttime="20210212 14:42:47.458" endtime="20210212 14:42:47.640"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:47.390" endtime="20210212 14:42:47.641"></status>
+</kw>
+<kw name="Click The Next Button" library="user_keywords">
+<doc>Clicks on any visible button that has the text "Next" in it.</doc>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:47.643" endtime="20210212 14:42:47.714"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:47.715" endtime="20210212 14:42:47.787"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:42:47.788" level="INFO">Clicking element '//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:42:47.787" endtime="20210212 14:42:48.075"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:47.642" endtime="20210212 14:42:48.076"></status>
+</kw>
+<kw name="Assert Text" library="user_keywords">
+<doc>Get element's text and assert if it's equal to a given/expected text, this by giving it the
+XPath of the element and the actual text that it's expected.</doc>
+<arguments>
+<arg>${LOCATION_INPUT}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+<arg>-- The element ${element} wasn't visible.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:48.084" endtime="20210212 14:42:49.410"></status>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${element}</arg>
+</arguments>
+<assign>
+<var>${element_text}</var>
+</assign>
+<msg timestamp="20210212 14:42:49.671" level="INFO">${element_text} = </msg>
+<status status="PASS" starttime="20210212 14:42:49.410" endtime="20210212 14:42:49.671"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${element_text}</arg>
+<arg>${actual_text}</arg>
+<arg>-- The element text "${element_text}" didn't match the expected one "${actual_text}"</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:49.671" endtime="20210212 14:42:49.673"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:48.077" endtime="20210212 14:42:49.674"></status>
+</kw>
+<kw name="Get Value" library="SeleniumLibrary">
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LATITUDE_INPUT}</arg>
+</arguments>
+<assign>
+<var>${ini_lati}</var>
+</assign>
+<msg timestamp="20210212 14:42:49.729" level="INFO">${ini_lati} = 0</msg>
+<status status="PASS" starttime="20210212 14:42:49.674" endtime="20210212 14:42:49.730"></status>
+</kw>
+<kw name="Get Value" library="SeleniumLibrary">
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LONGITUDE_INPUT}</arg>
+</arguments>
+<assign>
+<var>${ini_long}</var>
+</assign>
+<msg timestamp="20210212 14:42:49.797" level="INFO">${ini_long} = 0</msg>
+<status status="PASS" starttime="20210212 14:42:49.731" endtime="20210212 14:42:49.797"></status>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<arguments>
+<arg>${ini_lati}</arg>
+<arg>0</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:49.798" endtime="20210212 14:42:49.799"></status>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<arguments>
+<arg>${ini_long}</arg>
+<arg>0</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:49.800" endtime="20210212 14:42:49.801"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:47.386" endtime="20210212 14:42:49.802"></status>
+</kw>
+<kw name="Input Longitude And Latitude Coordinates">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Typing the longitude and latitude coordinates.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:49.805" endtime="20210212 14:42:49.807"></status>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_LONGITUDE_INPUT}</arg>
+<arg>BACKSPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:42:49.811" level="INFO">Sending key(s) ('BACKSPACE',) to //*[@data-test = 'project-longitude-input'] element.</msg>
+<msg timestamp="20210212 14:42:51.102" level="INFO">Pressing special key BACKSPACE to element.</msg>
+<msg timestamp="20210212 14:42:51.103" level="INFO">Releasing special key BACKSPACE.</msg>
+<status status="PASS" starttime="20210212 14:42:49.807" endtime="20210212 14:42:51.146"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LONGITUDE_INPUT}</arg>
+<arg>-116.9660262</arg>
+</arguments>
+<msg timestamp="20210212 14:42:51.148" level="INFO">Typing text '-116.9660262' into text field '//*[@data-test = 'project-longitude-input']'.</msg>
+<status status="PASS" starttime="20210212 14:42:51.147" endtime="20210212 14:42:51.725"></status>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<arguments>
+<arg>${PROJECT_LATITUDE_INPUT}</arg>
+<arg>BACKSPACE</arg>
+</arguments>
+<msg timestamp="20210212 14:42:51.729" level="INFO">Sending key(s) ('BACKSPACE',) to //*[@data-test = 'project-latitude-input'] element.</msg>
+<msg timestamp="20210212 14:42:52.692" level="INFO">Pressing special key BACKSPACE to element.</msg>
+<msg timestamp="20210212 14:42:52.693" level="INFO">Releasing special key BACKSPACE.</msg>
+<status status="PASS" starttime="20210212 14:42:51.726" endtime="20210212 14:42:52.725"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECT_LATITUDE_INPUT}</arg>
+<arg>32.5239919</arg>
+</arguments>
+<msg timestamp="20210212 14:42:52.727" level="INFO">Typing text '32.5239919' into text field '//*[@data-test = 'project-latitude-input']'.</msg>
+<status status="PASS" starttime="20210212 14:42:52.726" endtime="20210212 14:42:53.527"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>0.5s</arg>
+<arg>${MAP_CANVAS}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:53.530" endtime="20210212 14:42:53.531"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:53.532" endtime="20210212 14:42:54.659"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:54.660" endtime="20210212 14:42:54.662"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:53.528" endtime="20210212 14:42:54.662"></status>
+</kw>
+<kw name="Capture Element" library="RobotEyes">
+<arguments>
+<arg>${MAP_CANVAS}</arg>
+<arg>0.01</arg>
+<arg>${NEW_PROJECT_CANVAS_NAVIGATION_BAR}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:54.663" endtime="20210212 14:42:58.421"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:49.803" endtime="20210212 14:42:58.422"></status>
+</kw>
+<kw name="Click Next And Skip">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Clicking "Next" and "Skip" buttons.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:58.426" endtime="20210212 14:42:58.427"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//div[@class='css-nil']${NEXT_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:42:58.430" level="INFO">Clicking element '//div[@class='css-nil']//*[@data-test='next-button']'.</msg>
+<status status="PASS" starttime="20210212 14:42:58.428" endtime="20210212 14:42:58.672"></status>
+</kw>
+<kw name="Assert Text" library="user_keywords">
+<doc>Get element's text and assert if it's equal to a given/expected text, this by giving it the
+XPath of the element and the actual text that it's expected.</doc>
+<arguments>
+<arg>${MEMBERS_MODAL_ASSERT_TEXT}</arg>
+<arg>Invite Members to Project</arg>
+</arguments>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+<arg>-- The element ${element} wasn't visible.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:42:58.677" endtime="20210212 14:43:00.470"></status>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${element}</arg>
+</arguments>
+<assign>
+<var>${element_text}</var>
+</assign>
+<msg timestamp="20210212 14:43:00.667" level="INFO">${element_text} = Invite Members to Project</msg>
+<status status="PASS" starttime="20210212 14:43:00.471" endtime="20210212 14:43:00.667"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${element_text}</arg>
+<arg>${actual_text}</arg>
+<arg>-- The element text "${element_text}" didn't match the expected one "${actual_text}"</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:00.668" endtime="20210212 14:43:00.670"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:58.674" endtime="20210212 14:43:00.671"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${MEMBERS_MODAL_SKIP_BUTTON}</arg>
+<arg>15s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:00.671" endtime="20210212 14:43:00.770"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>${MEMBERS_MODAL_SKIP_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:00.771" level="INFO">Clicking button '//button[@class='css-mheo2i']'.</msg>
+<status status="PASS" starttime="20210212 14:43:00.770" endtime="20210212 14:43:01.153"></status>
+</kw>
+<kw name="Element Should Not Be Visible" library="SeleniumLibrary">
+<doc>Verifies that the element identified by ``locator`` is NOT visible.</doc>
+<arguments>
+<arg>${MEMBERS_MODAL_ASSERT_TEXT}</arg>
+<arg>10s</arg>
+</arguments>
+<msg timestamp="20210212 14:43:01.183" level="INFO">Element '//*[@data-test='members-modal-assert-text']' did not exist.</msg>
+<status status="PASS" starttime="20210212 14:43:01.154" endtime="20210212 14:43:01.183"></status>
+</kw>
+<kw name="Element Should Not Be Visible" library="SeleniumLibrary">
+<doc>Verifies that the element identified by ``locator`` is NOT visible.</doc>
+<arguments>
+<arg>${FLIGHT_NAME_ROWS}</arg>
+<arg>10s</arg>
+</arguments>
+<msg timestamp="20210212 14:43:01.227" level="INFO">Element '//*[@data-test='flight-name-row']' did not exist.</msg>
+<status status="PASS" starttime="20210212 14:43:01.184" endtime="20210212 14:43:01.228"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:42:58.423" endtime="20210212 14:43:01.228"></status>
+</kw>
+<kw name="Compare Images" library="RobotEyes">
+<msg timestamp="20210212 14:43:08.316" level="INFO">Comparison output: b'0 (0) @ 0,0'
+Comparison output: b'0 (0) @ 0,0'
+Comparison output: b'0 (0) @ 0,0'
+Comparison output: b'0 (0) @ 0,0'
+Comparison output: b'0 (0) @ 0,0'</msg>
+<status status="PASS" starttime="20210212 14:43:01.229" endtime="20210212 14:43:08.317"></status>
+</kw>
+<kw name="Teardown" type="teardown">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}==&gt; TEST TEARDOWN</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:08.324" endtime="20210212 14:43:08.329"></status>
+</kw>
+<kw name="Navigate To Org" library="user_keywords">
+<doc>Navigates to an Organization. It requires the name the org.</doc>
+<arguments>
+<arg>${WEB_AUTOMATION_ORG_NAME}</arg>
+</arguments>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${set_org_variable}, '${org_name}')]</arg>
+</arguments>
+<assign>
+<var>${org}</var>
+</assign>
+<msg timestamp="20210212 14:43:08.334" level="INFO">${org} = //div[contains(@class, 'org-item')]//*[contains(text(), 'Web Test Automation [Do not modify]')]</msg>
+<status status="PASS" starttime="20210212 14:43:08.333" endtime="20210212 14:43:08.334"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>- Navigating to organization '${org_name}'</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:08.335" endtime="20210212 14:43:08.336"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${SS_URL}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:08.339" level="INFO">Opening url 'https://staging.stscn.net/'</msg>
+<status status="PASS" starttime="20210212 14:43:08.337" endtime="20210212 14:43:15.260"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${SITE_SCAN_ICON_TAB}</arg>
+<arg>10s</arg>
+<arg>Site Scan sidebar icon not visible. Was the sidebar open?</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:15.261" endtime="20210212 14:43:16.547"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>1 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:16.548" endtime="20210212 14:43:16.549"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_TRIGGER}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:16.550" endtime="20210212 14:43:17.699"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_TRIGGER}</arg>
+<arg>10s</arg>
+<arg>Org button not visible. Was the sidebar open?</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:17.699" endtime="20210212 14:43:20.100"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_TRIGGER}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:20.102" level="INFO">Clicking element '//*[@data-test = 'account-menu-trigger']'.</msg>
+<status status="PASS" starttime="20210212 14:43:20.101" endtime="20210212 14:43:23.385"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:23.386" endtime="20210212 14:43:23.387"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${SWITCH_ORG_BUTTON}</arg>
+<arg>10s</arg>
+<arg>Switch org link not visible</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:23.388" endtime="20210212 14:43:23.509"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${SWITCH_ORG_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:23.511" level="INFO">Clicking element '//*[@data-test = 'switch-org-button']'.</msg>
+<status status="PASS" starttime="20210212 14:43:23.510" endtime="20210212 14:43:23.863"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${org}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:23.864" endtime="20210212 14:43:24.001"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${org}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:24.003" level="INFO">Clicking element '//div[contains(@class, 'org-item')]//*[contains(text(), 'Web Test Automation [Do not modify]')]'.</msg>
+<status status="PASS" starttime="20210212 14:43:24.002" endtime="20210212 14:43:24.344"></status>
+</kw>
+<kw name="_account menu overlay check" library="user_keywords">
+<doc>Private keyword to support the Navigate to Org keyword. It checks for the ACCOUNT_MENU_OVERLAY's
+presence and click's on it if there. Otherwise, it does nothing.</doc>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_OVERLAY}</arg>
+</arguments>
+<assign>
+<var>${menu_overlay}</var>
+</assign>
+<msg timestamp="20210212 14:43:24.413" level="INFO">${menu_overlay} = 1</msg>
+<status status="PASS" starttime="20210212 14:43:24.346" endtime="20210212 14:43:24.414"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${menu_overlay} == 0</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:24.415" endtime="20210212 14:43:24.418"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Nav to Org: Account menu overlay found. Clicking on it.</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:24.418" endtime="20210212 14:43:24.420"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${ACCOUNT_MENU_OVERLAY}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:24.421" level="INFO">Clicking element '//div[@class='popup-overlay']'.</msg>
+<status status="PASS" starttime="20210212 14:43:24.420" endtime="20210212 14:43:24.647"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:24.344" endtime="20210212 14:43:24.648"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:08.330" endtime="20210212 14:43:24.648"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECTS_TAB}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:24.653" level="INFO">Clicking element '//*[@data-test='organization-projects-tab']'.</msg>
+<status status="PASS" starttime="20210212 14:43:24.652" endtime="20210212 14:43:24.972"></status>
+</kw>
+<kw name="Delete Project" library="user_keywords">
+<doc>Checks if project exists and deletes it if true.</doc>
+<arguments>
+<arg>${project_name}</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Attempting to delete project ${project_name}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:24.978" endtime="20210212 14:43:24.980"></status>
+</kw>
+<kw name="Check That The Project Exists" library="user_keywords">
+<doc>Checks that a project in a particular org exists and returns a number that represents the times
+that the project was found.</doc>
+<arguments>
+<arg>${project_name}</arg>
+</arguments>
+<assign>
+<var>${project_exist}</var>
+</assign>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${PROJECTS_TAB}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:24.983" endtime="20210212 14:43:25.820"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${PROJECTS_TAB}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:25.822" level="INFO">Clicking element '//*[@data-test='organization-projects-tab']'.</msg>
+<status status="PASS" starttime="20210212 14:43:25.821" endtime="20210212 14:43:26.956"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Checking if project ${project_name} exists...</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:26.957" endtime="20210212 14:43:26.960"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>2s</arg>
+<arg>${ATLAS_PROJECTS_LIST}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:26.970" endtime="20210212 14:43:26.972"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:26.973" endtime="20210212 14:43:31.092"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:31.093" endtime="20210212 14:43:31.094"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:26.960" endtime="20210212 14:43:31.094"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>//*[text() = '${project_name}']</arg>
+</arguments>
+<assign>
+<var>${project_list_item}</var>
+</assign>
+<msg timestamp="20210212 14:43:31.096" level="INFO">${project_list_item} = //*[text() = 'New Project Delete']</msg>
+<status status="PASS" starttime="20210212 14:43:31.095" endtime="20210212 14:43:31.096"></status>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<doc>Returns the number of elements matching ``locator``.</doc>
+<arguments>
+<arg>${project_list_item}</arg>
+</arguments>
+<assign>
+<var>${count}</var>
+</assign>
+<msg timestamp="20210212 14:43:31.140" level="INFO">${count} = 1</msg>
+<status status="PASS" starttime="20210212 14:43:31.096" endtime="20210212 14:43:31.140"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${count} == 0</arg>
+<arg>Log To Console</arg>
+<arg>-- There is no project name that matches!</arg>
+<arg>ELSE</arg>
+<arg>Log To Console</arg>
+<arg>-- There are "${count}" matches with ${project_name} project name!</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- There are "${count}" matches with ${project_name} project name!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:31.142" endtime="20210212 14:43:31.144"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:31.141" endtime="20210212 14:43:31.144"></status>
+</kw>
+<msg timestamp="20210212 14:43:31.145" level="INFO">${project_exist} = 1</msg>
+<status status="PASS" starttime="20210212 14:43:24.980" endtime="20210212 14:43:31.145"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${project_exist} == 0</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:31.146" endtime="20210212 14:43:31.149"></status>
+</kw>
+<kw name="Get Project Three Dot Button Element By Name" library="user_keywords">
+<doc>Uses the project name, or part of it, to get the Three-dot button element, or ellipsis, of a
+roject in the Projects Tab's project list. It requires the project name string and to navigate to
+the Projects tab.</doc>
+<arguments>
+<arg>${project_name}</arg>
+</arguments>
+<assign>
+<var>${project_ellipsis}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>//*[contains(text(), '${project_name}')]/../../..//*[@data-test='atlas-project-popup-menu']</arg>
+</arguments>
+<assign>
+<var>${three_dot_element}</var>
+</assign>
+<msg timestamp="20210212 14:43:31.156" level="INFO">${three_dot_element} = //*[contains(text(), 'New Project Delete')]/../../..//*[@data-test='atlas-project-popup-menu']</msg>
+<status status="PASS" starttime="20210212 14:43:31.152" endtime="20210212 14:43:31.156"></status>
+</kw>
+<msg timestamp="20210212 14:43:31.157" level="INFO">${project_ellipsis} = //*[contains(text(), 'New Project Delete')]/../../..//*[@data-test='atlas-project-popup-menu']</msg>
+<status status="PASS" starttime="20210212 14:43:31.150" endtime="20210212 14:43:31.157"></status>
+</kw>
+<kw name="${i} IN RANGE [ 0 | ${project_exist} ]" type="for">
+<kw name="${i} = 0" type="foritem">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${project_ellipsis}</arg>
+<arg>${none}</arg>
+<arg>-- Project ellipsis button not visible!</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:31.159" endtime="20210212 14:43:31.240"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${project_ellipsis}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:31.242" level="INFO">Clicking element '//*[contains(text(), 'New Project Delete')]/../../..//*[@data-test='atlas-project-popup-menu']'.</msg>
+<status status="PASS" starttime="20210212 14:43:31.241" endtime="20210212 14:43:31.443"></status>
+</kw>
+<kw name="Organic Wait" library="user_keywords">
+<doc>Simulates a sleep with the help of a "Wait Until Element Is Visible" keyword, the amount of
+time receive will be doubled, example: "Organic Wait 1s"
+The next order in the code after the organic wait will be "2s" later.</doc>
+<arguments>
+<arg>1.5s</arg>
+<arg>${ATLAS_PROJECT_DELETE_OPTION}</arg>
+</arguments>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${time}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:31.446" endtime="20210212 14:43:31.447"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${element}</arg>
+<arg>10s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:31.449" endtime="20210212 14:43:34.536"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0s</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:34.536" endtime="20210212 14:43:34.537"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:31.443" endtime="20210212 14:43:34.538"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${ATLAS_PROJECT_DELETE_OPTION}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:34.539" level="INFO">Clicking element '//*[@data-test='atlas-project-delete-option']'.</msg>
+<status status="PASS" starttime="20210212 14:43:34.538" endtime="20210212 14:43:34.748"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ATLAS_DELETE_PROJECT_HEADER}</arg>
+<arg>${none}</arg>
+<arg>-- Delete Project modal was not visible</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:34.749" endtime="20210212 14:43:35.115"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ATLAS_DELETE_DATA_CHECKBOX}</arg>
+<arg>${none}</arg>
+<arg>"Delete project data" checkbox not visible</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:35.116" endtime="20210212 14:43:35.198"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${ATLAS_DELETE_DATA_CHECKBOX}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:35.200" level="INFO">Clicking element '//*[@data-test = 'atlas-delete-data-checkbox']'.</msg>
+<status status="PASS" starttime="20210212 14:43:35.199" endtime="20210212 14:43:35.391"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${ATLAS_DELETE_YES_BUTTON}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:35.392" level="INFO">Clicking element '//*[@data-test = 'atlas-delete-yes-button']'.</msg>
+<status status="PASS" starttime="20210212 14:43:35.391" endtime="20210212 14:43:35.652"></status>
+</kw>
+<kw name="Reload Page" library="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" starttime="20210212 14:43:35.653" endtime="20210212 14:43:36.787"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${ATLAS_PROJECTS_LIST}</arg>
+<arg>${none}</arg>
+<arg>-- Project list not visible</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:36.788" endtime="20210212 14:43:38.546"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:31.158" endtime="20210212 14:43:38.547"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:31.158" endtime="20210212 14:43:38.547"></status>
+</kw>
+<kw name="Page Should Not Contain" library="SeleniumLibrary">
+<doc>Verifies the current page does not contain ``text``.</doc>
+<arguments>
+<arg>//*[text() = '${project_name}']</arg>
+</arguments>
+<msg timestamp="20210212 14:43:38.645" level="INFO">Current page does not contain text '//*[text() = 'New Project Delete']'.</msg>
+<status status="PASS" starttime="20210212 14:43:38.547" endtime="20210212 14:43:38.645"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>-- Deleted project ${project_name}</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:38.646" endtime="20210212 14:43:38.648"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:24.973" endtime="20210212 14:43:38.648"></status>
+</kw>
+<kw name="Run Keyword If Test Failed" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<arguments>
+<arg>Log Failed Image Comparison Data</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:38.649" endtime="20210212 14:43:38.650"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210212 14:43:38.650" endtime="20210212 14:43:38.847"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}TEST TEARDOWN &lt;==</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:38.848" endtime="20210212 14:43:38.851"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:08.320" endtime="20210212 14:43:38.852"></status>
+</kw>
+<doc>Dev: Juan B.</doc>
+<tags>
+<tag>PROJECTS_TAB</tag>
+<tag>ROBOTEYES</tag>
+<tag>SMOKE</tag>
+<tag>TW-659</tag>
+</tags>
+<status status="PASS" starttime="20210212 14:40:37.036" endtime="20210212 14:43:38.853" critical="yes"></status>
+</test>
+<doc>Projects Tab - New Project</doc>
+<status status="PASS" starttime="20210212 14:40:36.619" endtime="20210212 14:43:38.861"></status>
+</suite>
+<status status="PASS" starttime="20210212 14:40:36.605" endtime="20210212 14:43:38.880"></status>
+</suite>
+<kw name="Tearing System Down" type="teardown">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}==&gt; Tearing System Down</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:38.897" endtime="20210212 14:43:38.901"></status>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Get SS Version</arg>
+</arguments>
+<kw name="Get SS Version">
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${DEBUG_FLAG} != ${false}</arg>
+</arguments>
+<msg timestamp="20210212 14:43:38.907" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210212 14:43:38.905" endtime="20210212 14:43:38.908"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:38.903" endtime="20210212 14:43:38.909"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:38.902" endtime="20210212 14:43:38.910"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210212 14:43:38.912" endtime="20210212 14:43:38.913"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}Tearing System Down &lt;==</arg>
+</arguments>
+<status status="PASS" starttime="20210212 14:43:38.914" endtime="20210212 14:43:38.916"></status>
+</kw>
+<status status="PASS" starttime="20210212 14:43:38.894" endtime="20210212 14:43:38.917"></status>
+</kw>
+<doc>Master initialization file.
+This init file should contain all the configurations that are common to ALL test cases.
+For instance, this file captures the OS environment variable and sets it as a
+variable for all TCs to use. So please use this file accordingly.</doc>
+<status status="PASS" starttime="20210212 14:40:35.230" endtime="20210212 14:43:38.917"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">PROJECTS_TAB</stat>
+<stat pass="1" fail="0">ROBOTEYES</stat>
+<stat pass="1" fail="0">SMOKE</stat>
+<stat pass="1" fail="0">TW-659</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Sitescan-Manager-Automation">Sitescan-Manager-Automation</stat>
+<stat pass="1" fail="0" id="s1-s1" name="Projects Tab">Sitescan-Manager-Automation.Projects Tab</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="New Project">Sitescan-Manager-Automation.Projects Tab.New Project</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
